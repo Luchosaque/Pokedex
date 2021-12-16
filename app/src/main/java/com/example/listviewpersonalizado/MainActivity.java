@@ -23,13 +23,15 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
 
         listView = findViewById(R.id.listView);
         
         AdaptadorPersonalizado adaptador = new AdaptadorPersonalizado(pokemons,this);
         listView.setAdapter(adaptador);
 
+        //PRE EJECUCION
+        System.out.println("fuck u");
         new Thread(new Runnable()
         {
             @Override
