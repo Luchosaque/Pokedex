@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity
 {
     ListView listView;
     ArrayList<Pokemon> pokemons = new ArrayList<>();
-    ArrayList<String> pkmNames = new ArrayList<>();
+    ArrayList<String> nmb = new ArrayList<>();
     static ArrayList<String> pkmImgUrl = new ArrayList<>();
 
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         
         AdaptadorPersonalizado adaptador = new AdaptadorPersonalizado(pokemons,this);
         listView.setAdapter(adaptador);
-
+//------------------PRE EJECUCION------------------
         new Thread(new Runnable()
         {
             @Override
@@ -38,14 +38,14 @@ public class MainActivity extends AppCompatActivity
                 try
                 {
                     Document pkm = Jsoup.connect("https://www.pokemon.com/es/pokedex/").get();
-                    pkmNames = (ArrayList<String>) pkm.select("[href^=/es/pokedex/]").eachText();
-                    pkmNames.remove(0);
+                    nmb = (ArrayList<String>) pkm.select("[href^=/es/pokedex/]").eachText();
+                    nmb.remove(0);
 
-                    for (int i =0;i<pkmNames.size();i++)
+                    for (int i = 0; i< nmb.size(); i++)
                     {
                         String pkmNum=String.format("%03d",i+1);
                         pkmImgUrl.add("https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + pkmNum + ".png");
-                        pokemons.add(new Pokemon(pkmNames.get(i)));
+                        pokemons.add(new Pokemon(nmb.get(i)));
                     }
                 }
                 catch (IOException e)
